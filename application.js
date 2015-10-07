@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash');
 var Vow = require('vow');
 var path  = require('path');
@@ -6,18 +8,15 @@ var ipc = require('ipc');
 var BrowserWindow = require('browser-window');
 var scriptInject = require('yaplayer-script-inject');
 
-require('crash-reporter').start();
+// require('crash-reporter').start();
 
+// Init Dev utils.
+var dev = require('yaplayer-dev');
+// Init global hotkeys
+require('yaplayer-hotkeys');
+// Init UI elements
+var iface = require('yaplayer-iface');
 
-// Wait while yaplayer-api-irp:reciever will be released on bond
-ipc.on('api:receiver:saveme', function(event) {
-	// Mount global hotkeys
-	require('yaplayer-hotkeys')(event.sender);
-});
-
-
-
-var win = null;
 
 app.on('window-all-closed', function() {
 	if (process.platform != 'darwin') {
@@ -25,36 +24,42 @@ app.on('window-all-closed', function() {
 	}
 });
 
+
+
 app.on('ready', function() {
+
 	// Create the browser window.
-	win = new BrowserWindow({
+	var win = new BrowserWindow({
+		// @todo: add restore size and position
 		width: 1024,
-		height: 768,
-		'web-preferences': {
-			// javascript: false
-			// preload: path.join(__dirname, 'preload-fix.js')
-		}
+		height: 768
 	});
 
-	// Emitted when the window is closed.
-	win.on('closed', function() {
-		win = null;
-	});
-
-	// Init Dev utils.
-	require('yaplayer-dev')(win);
+	iface(win);
 
 	// Init Yandex music application
 	initYandexMusicApp(win)
-	.then(function() {
-		// Init yaPlayer Application
-		loadPlayer(win).then(function() {
-			console.info('[app] Application init - OK.');
+		.then(function() {
+			// Init yaPlayer Application
+			loadPlayer(win).then(function() {
+				// Init dev utils if need (CLI --dev)
+				dev(win);
+				console.info('[app] Application init - OK.');
+			});
 		});
-	});
 
 	// load yandex music page
 	win.loadUrl('https://music.yandex.ru');
+
+	win.on('closed', function() {
+		console.log('[app] close all windows')
+		win = null;
+		app.quit()
+	});
+
+
+	// Init yaplayer notification
+	require('yaplayer-notification');
 
 });
 
@@ -68,6 +73,7 @@ function initYandexMusicApp(win) {
 			source: [
 				path.join(__dirname, 'vendor', 'lodash.js'),
 				path.join(__dirname, 'vendor', 'jquery.js'),
+				// @todo: Add load script from cache and auto check version
 				'https://yastatic.net/jquery-ui/1.10.3/jquery-ui.min.js',
 				'https://yastatic.net/share/share.js',
 				'https://music.yandex.ru/api/v2.0/index.js?v=0.8.03'
