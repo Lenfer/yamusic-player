@@ -1,12 +1,12 @@
 'use strict';
 
-var _ = require('lodash');
 var Vow = require('vow');
 var path  = require('path');
 var app = require('app');
-var ipc = require('ipc');
 var BrowserWindow = require('browser-window');
-var scriptInject = require('yaplayer-script-inject');
+var remoteScripting = require('yaplayer-remote-scripting');
+var scriptInject = remoteScripting.inject;
+var remoteExecute = remoteScripting.execute;
 
 // require('crash-reporter').start();
 
@@ -52,9 +52,9 @@ app.on('ready', function() {
 	win.loadUrl('https://music.yandex.ru');
 
 	win.on('closed', function() {
-		console.log('[app] close all windows')
+		console.log('[app] close all windows');
 		win = null;
-		app.quit()
+		app.quit();
 	});
 
 
@@ -67,17 +67,32 @@ app.on('ready', function() {
 function initYandexMusicApp(win) {
 	var promise = Vow.promise();
 	win.webContents.on('did-finish-load', function() {
+		// Init indicate
+		var removeIndicator = remoteScripting.initIndicate(win);
+
 		// load patched lodash lib
 		scriptInject({
 			browserWindow: win,
 			source: [
 				path.join(__dirname, 'vendor', 'lodash.js'),
-				path.join(__dirname, 'vendor', 'jquery.js'),
-				// @todo: Add load script from cache and auto check version
-				'https://yastatic.net/jquery-ui/1.10.3/jquery-ui.min.js',
-				'https://yastatic.net/share/share.js',
-				'https://music.yandex.ru/api/v2.0/index.js?v=0.8.03'
+				path.join(__dirname, 'vendor', 'jquery.js')
 			]
+		}).then(function() {
+			return remoteExecute(win, function() {
+				return $('script')
+					.map(function() {
+						return this.src;
+					})
+					.filter(function(idx, src) {
+						return src && !src.match(/jquery.min/);
+					})
+					.toArray();
+			}).then(function(scriptList) {
+				return scriptInject({
+					browserWindow: win,
+					source: scriptList
+				});
+			});
 		}).then(function() {
 			scriptInject({
 				browserWindow: win,
@@ -87,6 +102,7 @@ function initYandexMusicApp(win) {
 				},
 				source: 'https://music.yandex.ru/index.ru.js?v=0.8.03'
 			}).then(function() {
+				removeIndicator();
 				win.webContents.executeJavaScript('Mu.init();');
 				promise.fulfill();
 			});
