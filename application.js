@@ -93,19 +93,11 @@ function initYandexMusicApp(win) {
 					source: scriptList
 				});
 			});
-		}).then(function() {
-			scriptInject({
-				browserWindow: win,
-				preload: function(source) {
-					return source.replace('var t=new Mu.MiniDi;',
-							'var t=window._muMiniDi=new Mu.MiniDi;');
-				},
-				source: 'https://music.yandex.ru/index.ru.js?v=0.8.03'
-			}).then(function() {
-				removeIndicator();
-				win.webContents.executeJavaScript('Mu.init();');
-				promise.fulfill();
-			});
+		})
+		.then(function() {
+			removeIndicator();
+			win.webContents.executeJavaScript('Mu.init();');
+			promise.fulfill();
 		});
 	});
 	return promise;
