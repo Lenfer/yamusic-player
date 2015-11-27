@@ -28,8 +28,11 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
 
+	var icon = path.join(process.cwd(), 'source/play128.png');
+
 	// Create the browser window.
 	var win = new BrowserWindow({
+		icon: icon,
 		// @todo: add restore size and position
 		width: 1024,
 		height: 768
@@ -49,7 +52,7 @@ app.on('ready', function() {
 		});
 
 	// load yandex music page
-	win.loadUrl('https://music.yandex.ru');
+	win.loadURL('https://music.yandex.ru');
 
 	win.on('closed', function() {
 		console.log('[app] close all windows');
