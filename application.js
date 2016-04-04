@@ -1,6 +1,7 @@
 'use strict';
 
 var Vow = require('vow');
+var _ = require('lodash');
 var path  = require('path');
 var app = require('app');
 var BrowserWindow = require('browser-window');
@@ -87,13 +88,24 @@ function initYandexMusicApp(win) {
 						return this.src;
 					})
 					.filter(function(idx, src) {
-						return src && !src.match(/jquery.min/);
+						// Exclude from script list ya jquery and index.js (already load)
+						return src && !src.match(/(jquery.min)|(index\.js)/);
 					})
 					.toArray();
 			}).then(function(scriptList) {
+
+				console.log(scriptList);
+
 				return scriptInject({
 					browserWindow: win,
-					source: scriptList
+					source: scriptList,
+					/*preload: function(src, opt) {
+						// Hook for get application scope
+						if (opt.source.match('index.ru.js')) {
+							return src.replace('t.init({', 't.init(window.__debugPnt = {');
+						}
+						return src;
+					}*/
 				});
 			});
 		})
