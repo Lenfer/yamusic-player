@@ -89,7 +89,7 @@ function initYandexMusicApp(win) {
 					})
 					.filter(function(idx, src) {
 						// Exclude from script list ya jquery and index.js (already load)
-						return src && !src.match(/(jquery.min)|(index\.js)/);
+						return src && !src.match(/(push\-notifications)|(context)|(jquery.min)|(index\.js)/);
 					})
 					.toArray();
 			}).then(function(scriptList) {
