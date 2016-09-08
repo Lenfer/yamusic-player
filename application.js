@@ -3,8 +3,12 @@
 var Vow = require('vow');
 var _ = require('lodash');
 var path  = require('path');
-var app = require('app');
-var BrowserWindow = require('browser-window');
+
+// var app = require('app');
+// var BrowserWindow = require('browser-window');
+
+const {app, BrowserWindow} = require('electron')
+
 var remoteScripting = require('yaplayer-remote-scripting');
 var scriptInject = remoteScripting.inject;
 var remoteExecute = remoteScripting.execute;
@@ -36,8 +40,11 @@ app.on('ready', function() {
 		icon: icon,
 		// @todo: add restore size and position
 		width: 1024,
-		height: 768
+		height: 768,
+		webSecurity: false
 	});
+
+	win.setMenuBarVisibility(false);
 
 	iface(win);
 
