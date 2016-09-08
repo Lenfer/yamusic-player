@@ -1,5 +1,41 @@
 {
-	"name": "YaMusicPlayer",
-	"version": "0.1.2",
-	"main": "application.js"
+  "name": "Yandex Music",
+  "version": "0.1.2",
+  "main": "application.js",
+  "description": "Wrapper for yandex music site with blackjack and hotkeys",
+  "dependencies": {
+    "is-url": "^1.2.2",
+    "lodash": "^3.10.1",
+    "vow": "^0.3.13",
+    "yaplayer-api-ipc": "^0.0.1",
+    "yaplayer-config": "^0.0.1",
+    "yaplayer-dev": "^0.0.1",
+    "yaplayer-hotkeys": "^0.0.1",
+    "yaplayer-iface": "^0.0.1",
+    "yaplayer-notification": "^0.0.1",
+    "yaplayer-remote-scripting": "^0.0.1"
+  },
+  "devDependencies": {
+    "electron": "^1.3.5",
+    "electron-builder": "^6.5.2"
+  },
+  "build": {
+    "appId": "yamusic.site.wrapper",
+    "category": "music"
+  },
+  "scripts": {
+    "test": "echo \"No test specified\"",
+    "start": "electron ./",
+    "build": "build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lenfer/yamusic-player.git"
+  },
+  "author": "Dergaev Andrey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lenfer/yamusic-player/issues"
+  },
+  "homepage": "https://github.com/Lenfer/yamusic-player#readme"
 }
