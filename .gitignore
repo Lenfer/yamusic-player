@@ -4,4 +4,5 @@ node_modules/is-url/
 node_modules/lodash/
 node_modules/vow/
 node_modules/.bin/
+dist/
 npm-debug.log

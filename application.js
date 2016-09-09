@@ -70,7 +70,7 @@ app.on('ready', function() {
 
 
 	// Init yaplayer notification
-	require('yaplayer-notification');
+	require('yaplayer-notification')(win);
 
 });
 

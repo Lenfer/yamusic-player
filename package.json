@@ -1,6 +1,6 @@
 {
   "name": "yandex-music-player",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "main": "application.js",
   "description": "Wrapper for yandex music site with blackjack and hotkeys",
   "dependencies": {
@@ -21,12 +21,14 @@
   },
   "build": {
     "appId": "yamusic.site.wrapper",
-    "category": "music"
+    "category": "music",
+    "productName": "Яндекс.Музыка"
   },
   "scripts": {
     "test": "echo \"No test specified\"",
     "start": "electron ./",
-    "build": "build",
+    "pack": "build --dir",
+    "dist": "build",
     "prepare": "npm i is-url lodash vow electron electron-builder"
   },
   "repository": {
