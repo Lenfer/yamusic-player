@@ -105,14 +105,7 @@ function initYandexMusicApp(win) {
 
 				return scriptInject({
 					browserWindow: win,
-					source: scriptList,
-					/*preload: function(src, opt) {
-						// Hook for get application scope
-						if (opt.source.match('index.ru.js')) {
-							return src.replace('t.init({', 't.init(window.__debugPnt = {');
-						}
-						return src;
-					}*/
+					source: scriptList
 				});
 			});
 		})
@@ -125,6 +118,11 @@ function initYandexMusicApp(win) {
 	return promise;
 }
 
+/**
+ * Load player layer
+ * @param {Window} win Electorn Browser Window instance
+ * @returns {Promise}
+ */
 function loadPlayer(win) {
 	// inject own api in page
 	var moduledir = path.dirname(require.resolve('yaplayer-api-ipc'));
