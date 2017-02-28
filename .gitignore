@@ -1,8 +1,6 @@
-node_modules/electron-builder/
-node_modules/electron
-node_modules/is-url/
-node_modules/lodash/
-node_modules/vow/
-node_modules/.bin/
+node_modules/*
+node_modules/yaplayer*
 dist/
 npm-debug.log
+.DS_Store
+**/.idea

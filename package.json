@@ -1,6 +1,6 @@
 {
   "name": "yandex-music-player",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "application.js",
   "description": "Wrapper for yandex music site with blackjack and hotkeys",
   "dependencies": {
@@ -16,8 +16,8 @@
     "yaplayer-remote-scripting": "^0.0.1"
   },
   "devDependencies": {
-    "electron": "^1.3.5",
-    "electron-builder": "^6.5.2"
+    "electron": "^1.6.0",
+    "electron-builder": "^6.7.7"
   },
   "build": {
     "appId": "yamusic.site.wrapper",
