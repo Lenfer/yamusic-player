@@ -1,6 +1,6 @@
 {
   "name": "yandex-music-player",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "main": "application.js",
   "description": "Wrapper for yandex music site with blackjack and hotkeys",
   "dependencies": {
