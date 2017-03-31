@@ -1,0 +1,10 @@
+{
+	"name": "config",
+	"version": "0.0.1",
+	"description": "YaMusic player config",
+	"author": {
+		"name": "Andrey Dergaev",
+		"email": "lenfer.spb@gmail.com"
+	},
+	"private": true
+}

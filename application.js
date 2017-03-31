@@ -9,18 +9,18 @@ var path  = require('path');
 
 const {app, BrowserWindow} = require('electron')
 
-var remoteScripting = require('yaplayer-remote-scripting');
+var remoteScripting = require('_/remote-scripting');
 var scriptInject = remoteScripting.inject;
 var remoteExecute = remoteScripting.execute;
 
 // require('crash-reporter').start();
 
 // Init Dev utils.
-var dev = require('yaplayer-dev');
+var dev = require('_/dev');
 // Init global hotkeys
-require('yaplayer-hotkeys');
+require('_/hotkeys');
 // Init UI elements
-var iface = require('yaplayer-iface');
+var iface = require('_/iface');
 
 
 app.on('window-all-closed', function() {
@@ -70,7 +70,7 @@ app.on('ready', function() {
 
 
 	// Init yaplayer notification
-	require('yaplayer-notification')(win);
+	require('_/notification')(win);
 
 });
 
@@ -96,7 +96,7 @@ function initYandexMusicApp(win) {
 					})
 					.filter(function(idx, src) {
 						// Exclude from script list ya jquery and index.js (already load)
-						return src && !src.match(/(push\-notifications)|(context)|(jquery.min)|(index\.js)/);
+						return src && !src.match(/(push\-notifications)|(context)|(jquery.min)/);
 					})
 					.toArray();
 			}).then(function(scriptList) {
@@ -125,7 +125,7 @@ function initYandexMusicApp(win) {
  */
 function loadPlayer(win) {
 	// inject own api in page
-	var moduledir = path.dirname(require.resolve('yaplayer-api-ipc'));
+	var moduledir = path.dirname(require.resolve('_/api-ipc'));
 	return scriptInject({
 		browserWindow: win,
 		isolate: true,

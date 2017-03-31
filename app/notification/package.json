@@ -1,0 +1,10 @@
+{
+	"name": "notification",
+	"version": "0.0.1",
+	"description": "YaMusic player notification popup",
+	"author": {
+		"name": "Andrey Dergaev",
+		"email": "lenfer.spb@gmail.com"
+	},
+	"private": true
+}

@@ -1,0 +1,10 @@
+{
+	"name": "remote-scripting",
+	"version": "0.0.1",
+	"description": "YaMusic player remote script control",
+	"author": {
+		"name": "Andrey Dergaev",
+		"email": "lenfer.spb@gmail.com"
+	},
+	"private": true
+}

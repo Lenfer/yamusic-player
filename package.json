@@ -29,7 +29,7 @@
     "start": "electron ./",
     "pack": "build --dir",
     "dist": "build",
-    "prepare": "npm i is-url lodash vow electron electron-builder"
+    "postinstall": "rm -f \"./node_modules/_\" && ln -s \"../app/\" \"./node_modules/_\""
   },
   "repository": {
     "type": "git",
