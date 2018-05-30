@@ -1,6 +1,6 @@
-#Yandex Music Electron Warapper
+# Yandex Music Electron Warapper
 
-##Install
+## Install
 ```
 npm install
 npm run dist
