@@ -5,23 +5,22 @@
   "description": "Wrapper for yandex music site with blackjack and hotkeys",
   "dependencies": {
     "is-url": "^1.2.2",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.10",
     "vow": "^0.3.13"
   },
   "devDependencies": {
-    "electron": "1.6.11",
-    "electron-builder": "19.8.0"
+    "electron": "*",
+    "electron-builder": "*"
   },
   "build": {
     "appId": "yamusic.site.wrapper",
-    "productName": "Яндекс.Музыка"
+    "productName": "Yandex.Music"
   },
   "scripts": {
     "test": "echo \"No test specified\"",
     "start": "electron ./",
     "pack": "build --dir",
-    "dist": "build",
-    "postinstall": "rm -f \"./node_modules/_\" && ln -s \"../app/\" \"./node_modules/_\""
+    "dist": "build"
   },
   "repository": {
     "type": "git",

@@ -3,7 +3,7 @@
 var ipc = require('electron').ipcMain;
 const {globalShortcut} = require('electron');
 var _ = require('lodash');
-var config = require('_/config');
+var config = require('../config');
 
 // Wait while api-irp:reciever will be released on bond
 ipc.on('api:receiver:saveme', function(event) {

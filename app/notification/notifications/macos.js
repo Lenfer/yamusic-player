@@ -1,6 +1,6 @@
 'use strict';
 
-const remoteScripting = require('_/remote-scripting');
+const remoteScripting = require('../../remote-scripting');
 const remoteExecute = remoteScripting.execute;
 
 

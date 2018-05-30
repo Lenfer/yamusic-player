@@ -9,18 +9,18 @@ var path  = require('path');
 
 const {app, BrowserWindow} = require('electron')
 
-var remoteScripting = require('_/remote-scripting');
+var remoteScripting = require('./app/remote-scripting');
 var scriptInject = remoteScripting.inject;
 var remoteExecute = remoteScripting.execute;
 
 // require('crash-reporter').start();
 
 // Init Dev utils.
-var dev = require('_/dev');
+var dev = require('./app/dev');
 // Init global hotkeys
-require('_/hotkeys');
+require('./app/hotkeys');
 // Init UI elements
-var iface = require('_/iface');
+var iface = require('./app/iface');
 
 
 app.on('window-all-closed', function() {
@@ -70,7 +70,7 @@ app.on('ready', function() {
 
 
 	// Init yaplayer notification
-	require('_/notification')(win);
+	require('./app/notification')(win);
 
 });
 
@@ -125,7 +125,7 @@ function initYandexMusicApp(win) {
  */
 function loadPlayer(win) {
 	// inject own api in page
-	var moduledir = path.dirname(require.resolve('_/api-ipc'));
+	var moduledir = path.dirname(require.resolve('./app/api-ipc'));
 	return scriptInject({
 		browserWindow: win,
 		isolate: true,
